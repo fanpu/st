@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-static int borderpx = 2;
+static char *font = "Source Code Pro:pixelsize=14:antialias=true:autohint=true";
+static int borderpx = 0;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -16,7 +16,7 @@ static int borderpx = 2;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/sh";
+static char *shell = "/bin/zsh";
 char *utmp = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
@@ -163,11 +163,12 @@ static uint forcemousemod = ShiftMask;
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
-	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = 1},      0, /* !alt */ -1 },
-	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = 1},      0, /* !alt */ -1 },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
 	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
+	/* scollback */
+        { XK_ANY_MOD,           Button4, kscrollup,      {.i = 1},      0, /* !alt */ -1 },
+        { XK_ANY_MOD,           Button5, kscrolldown,    {.i = 1},      0, /* !alt */ -1 },
 };
 
 /* Internal keyboard shortcuts. */
@@ -188,8 +189,9 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
-	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
+	/* scrollback */
+        { ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
+        { ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
 };
 
 /*
